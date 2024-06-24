@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import {Link} from 'react-router-dom'
 import {
   Disclosure,
   DisclosureButton,
@@ -310,12 +311,14 @@ export default function Example() {
               </div>
 
               <div className="mt-10 flex">
+                <Link to="/cart">
                 <button
                   type="submit"
-                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
                 >
-                  Add to bag
+                   Add to bag
                 </button>
+                </Link>
 
                 <button
                   type="button"
