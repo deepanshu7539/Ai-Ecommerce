@@ -10,6 +10,7 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isFirstOpen, setIsFirstOpen] = useState(true);
+  const [shouldPathCalled,setShouldPathCalled]=useState(true);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -21,15 +22,15 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
   };
 
   const systemResponses = {
-    cart: "You can view your shopping cart here.",
-    login: "Please log into your account.",
-    register: "Register a new account with us.",
-    detail: "Here is your Black T-shirt",
-    products: "Here are all the products.",
-    history: "You can view your order history here.",
-    status: "Check the status of your order here.",
-    payment: "Make your payment here.",
-    red: "Here is your Red T-shirt",
+    cart: "Here's your shopping cart. Take a look at what you've picked!",
+    login: "Welcome back! Please log into your account to continue.",
+    register: "Let's get you registered for a wonderful shopping experience.",
+    detail: "Here it is - your Black T-shirt!",
+    products: "Check out all these amazing products!",
+    history: "Here's your order history!",
+    status: "Check the status here!",
+    payment: "Almost there! Make your payment here to complete the purchase.",
+    red: "Here's your stunning Red T-shirt",
     default: "How can I assist you further?",
   };
 
@@ -70,6 +71,7 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
       const systemResponse = { text: responseText, sender: "system" };
 
       setMessages((prevMessages) => [...prevMessages, systemResponse]);
+      setShouldPathCalled(false);
     }
   };
 
@@ -99,7 +101,17 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
   }, [isOpen]);
 
   useEffect(() => {
-    handleInitialMessage();
+    if(shouldPathCalled) {
+    const text=location.pathname.substring(1);
+    console.log(text);
+    const responseText =
+        systemResponses[text] || systemResponses["default"];
+        const systemResponse = { text: responseText, sender: "system" };
+
+      setMessages((prevMessages) => [...prevMessages, systemResponse]);
+    }else {
+      setShouldPathCalled(true);
+    }
   }, [location.pathname]);
 
   return (

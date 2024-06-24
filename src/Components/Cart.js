@@ -6,25 +6,27 @@ import {
 } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import Faq from "./Faq";
+import { useEffect, useState } from "react";
 
-const products = [
+const initialProducts = [
   {
     id: 1,
     name: "Zip Tote Basket",
     href: "#",
-    price: "$140.00",
+    price: 140,
     color: "White and Black",
     inStock: true,
     size: "Large",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg",
     imageAlt: "Front of men's Basic Tee in sienna.",
+    quantity: 1,
   },
   {
     id: 2,
     name: "T-Shirt",
     href: "#",
-    price: "$100.00",
+    price: 100,
     color: "Black",
     inStock: false,
     leadTime: "3–4 weeks",
@@ -32,21 +34,55 @@ const products = [
     imageSrc:
       "https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=600",
     imageAlt: "Front of men's Basic Tee in black.",
+    quantity: 1,
   },
   {
     id: 3,
     name: "Nomad Tumbler",
     href: "#",
-    price: "$35.00",
+    price: 35,
     color: "White",
     inStock: true,
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg",
     imageAlt: "Insulated bottle with white base and black snap lid.",
+    quantity: 1,
   },
 ];
 
 export default function Cart() {
+
+  const [products, setProducts] = useState(initialProducts);
+  const [subtotal, setSubtotal] = useState(0);
+  const [shipping, setShipping] = useState(5.00);
+  const [tax, setTax] = useState(2.00);
+  const [total, setTotal] = useState(0);
+
+  const handleChangeQuantity = (productId, productQuant) => {
+    setProducts((prev) =>
+      prev.map((product) =>
+        product.id === productId ? { ...product, quantity: productQuant } : product
+      )
+    )
+  }
+
+  const handleRemoveProduct = (productId) => {
+    setProducts((prev) => prev.filter(product => product.id !== productId));
+  }
+
+  useEffect(() => {
+    const newSubtotal = products.reduce(
+      (acc, product) => acc + product.price * product.quantity,
+      0
+    );
+    setSubtotal(newSubtotal);
+    if(newSubtotal===0) {
+      setShipping(0);
+      setTax(0);
+    }
+    setTotal(newSubtotal + shipping + tax);
+  }, [products, shipping, tax]);
+
   return (
     <div className="bg-white">
       <header className="relative bg-white">
@@ -98,21 +134,23 @@ export default function Cart() {
                           ) : null}
                         </div>
                         <p className="mt-1 text-sm font-medium text-gray-900">
-                          {product.price}
+                          ${product.price}.00
                         </p>
                       </div>
 
                       <div className="mt-4 sm:mt-0 sm:pr-9">
                         <label
-                          htmlFor={`quantity-${productIdx}`}
+                          htmlFor={`quantity-${product.id}`}
                           className="sr-only"
                         >
                           Quantity, {product.name}
                         </label>
                         <select
-                          id={`quantity-${productIdx}`}
-                          name={`quantity-${productIdx}`}
+                          id={`quantity-${product.id}`}
+                          name={`quantity-${product.id}`}
                           className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                          value={product.quantity}
+                          onChange={(e) => handleChangeQuantity(product.id, parseInt(e.target.value, 10))}
                         >
                           {[...Array(8)].map((_, i) => (
                             <option key={i} value={i + 1}>
@@ -130,6 +168,7 @@ export default function Cart() {
                             <XMarkIconMini
                               className="h-5 w-5"
                               aria-hidden="true"
+                              onClick={()=>handleRemoveProduct(product.id)}
                             />
                           </button>
                         </div>
@@ -174,7 +213,7 @@ export default function Cart() {
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">$275.00</dd>
+                <dd className="text-sm font-medium text-gray-900">${subtotal}.00</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex items-center text-sm text-gray-600">
@@ -192,7 +231,7 @@ export default function Cart() {
                     />
                   </Link>
                 </dt>
-                <dd className="text-sm font-medium text-gray-900">$5.00</dd>
+                <dd className="text-sm font-medium text-gray-900">${shipping}.00</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex text-sm text-gray-600">
@@ -210,13 +249,13 @@ export default function Cart() {
                     />
                   </Link>
                 </dt>
-                <dd className="text-sm font-medium text-gray-900">$2.00</dd>
+                <dd className="text-sm font-medium text-gray-900">${tax}.00</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="text-base font-medium text-gray-900">
                   Order total
                 </dt>
-                <dd className="text-base font-medium text-gray-900">$282.00</dd>
+                <dd className="text-base font-medium text-gray-900">${total}.00</dd>
               </div>
             </dl>
 
