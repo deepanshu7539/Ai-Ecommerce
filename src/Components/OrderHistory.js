@@ -33,11 +33,11 @@ const orders = [
       {
         id: 3,
         name: "Nomad Tumbler",
-        to: "#",
+        to: "/detail",
         price: "$35.00",
         color: "White",
         status: "Delivered Jan 25, 2021",
-        quantity:1,
+        quantity: 1,
         imageSrc:
           "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg",
         imageAlt: "Insulated bottle with white base and black snap lid.",
