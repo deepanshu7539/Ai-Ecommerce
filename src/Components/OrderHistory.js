@@ -10,25 +10,25 @@ const orders = [
     products: [
       {
         id: 1,
-        name: "Zip Tote Basket",
-        to: "/detail",
-        price: "$140.00",
-        status: "Delivered Jan 25, 2021",
-        quantity: 1,
-        imageSrc:
-          "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg",
-        imageAlt: "Zip Tote Basket",
-      },
-      {
-        id: 1,
         name: "T-Shirt",
         to: "/detail",
         price: "$100.00",
-        status: "Delivered Jan 25, 2021",
+        status: "To be Delivered June 28, 2024",
         quantity: 1,
         imageSrc:
           "https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=600",
         imageAlt: "T-Shirt",
+      },
+      {
+        id: 2,
+        name: "Zip Tote Basket",
+        to: "/detail",
+        price: "$140.00",
+        status: "To be Delivered June 28, 2024",
+        quantity: 1,
+        imageSrc:
+          "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg",
+        imageAlt: "Zip Tote Basket",
       },
       {
         id: 3,
@@ -36,8 +36,8 @@ const orders = [
         to: "/detail",
         price: "$35.00",
         color: "White",
-        status: "Delivered Jan 25, 2021",
-        quantity: 1,
+        status: "To be Delivered June 28, 2024",
+        quantity:1,
         imageSrc:
           "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg",
         imageAlt: "Insulated bottle with white base and black snap lid.",
@@ -53,11 +53,11 @@ export default function OrderHistory() {
 
   const handleTrackOrder = (orderNumber) => {};
   return (
-    <div className="bg-white max-w-4xl mx-auto">
+    <div className="bg-white max-w-4xl mx-auto pl-4">
       <div className="mx-auto max-w-7xl">
         <div className="">
           <h1 className="text-xl mb-6 text-[#444444] text-center font-bold">
-            Order history
+            Order Details
           </h1>
         </div>
 
@@ -77,7 +77,7 @@ export default function OrderHistory() {
                     <div className="flex justify-between sm:block">
                       <dt className="font-medium text-gray-900">Date placed</dt>
                       <dd className="sm:mt-1">
-                        <time dateTime={order.datetime}>{order.date}</time>
+                        <time dateTime={order.datetime}>June 24, 2024</time>
                       </dd>
                     </div>
                     <div className="flex justify-between pt-6 sm:block sm:pt-0">
@@ -148,17 +148,12 @@ export default function OrderHistory() {
                       >
                         Status
                       </th>
-                      <th
-                        scope="col"
-                        className="w-0 py-3 text-right font-normal p-4  "
-                      >
-                        Info
-                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 border-b border-gray-200 text-sm sm:border-t">
                     {order.products.map((product) => (
                       <tr key={product.id}>
+                      <Link to="/detail">
                         <td className="">
                           <div className="flex items-center">
                             <div>
@@ -178,6 +173,7 @@ export default function OrderHistory() {
                             </div>
                           </div>
                         </td>
+                      </Link>
                         <td className=" sm:table-cell text-black">
                           {product.price}
                         </td>
@@ -187,12 +183,7 @@ export default function OrderHistory() {
                         <td className="sm:table-cell text-black ">
                           {product.status}
                         </td>
-                        <td className="whitespace-nowrap py-6 text-right font-medium w-1/4 pr-4">
-                          <Link to='/detail' className="text-indigo-600">
-                            View
-                            <span className="sr-only">, {product.name}</span>
-                          </Link>
-                        </td>
+                        
                       </tr>
                     ))}
                   </tbody>

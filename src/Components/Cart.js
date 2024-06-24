@@ -11,19 +11,6 @@ import { useEffect, useState } from "react";
 const initialProducts = [
   {
     id: 1,
-    name: "Zip Tote Basket",
-    href: "#",
-    price: 140,
-    color: "White and Black",
-    inStock: true,
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in sienna.",
-    quantity: 1,
-  },
-  {
-    id: 2,
     name: "T-Shirt",
     href: "#",
     price: 100,
@@ -34,6 +21,19 @@ const initialProducts = [
     imageSrc:
       "https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=600",
     imageAlt: "Front of men's Basic Tee in black.",
+    quantity: 1,
+  },
+  {
+    id: 2,
+    name: "Zip Tote Basket",
+    href: "#",
+    price: 140,
+    color: "White and Black",
+    inStock: true,
+    size: "Large",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg",
+    imageAlt: "Front of men's Basic Tee in sienna.",
     quantity: 1,
   },
   {
@@ -104,6 +104,7 @@ export default function Cart() {
             >
               {products.map((product, productIdx) => (
                 <li key={product.id} className="flex py-2 sm:py-4">
+                  <Link to="/detail">
                   <div className="flex-shrink-0">
                     <img
                       src={product.imageSrc}
@@ -111,6 +112,7 @@ export default function Cart() {
                       className="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
                     />
                   </div>
+                  </Link>
 
                   <div className="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
                     <div className="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
