@@ -45,7 +45,7 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
     { command: "status", action: "status" },
     { command: "payment", action: "payment" },
     { command: "red", action: "red" },
-    { command: "gray", action: "gray" },
+    { command: "gray", action: "grayb" },
   ];
 
   const parseUserInput = (input) => {
@@ -122,10 +122,10 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
         onClick={toggleSidebar}
         className={`fixed ${
           isOpen ? "top-2" : "bottom-5"
-        } right-2 bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-2 rounded-md shadow-lg focus:outline-none z-[100]`}
+        } right-2 bg-red-500 hover:bg-red-600 text-white py-2 px-2 rounded-md shadow-lg focus:outline-none z-[100]`}
       >
         {isOpen ? (
-          <XCircleIcon className="h-6 w-6 text-white" aria-hidden="true" />
+          <XCircleIcon className="h-6 w-6 text-white text-bold" aria-hidden="true" />
         ) : (
           "Open Chat"
         )}
@@ -137,7 +137,7 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
       >
         <div className="flex flex-col h-full">
           <div className="p-4 border-b">
-            <h2 className="text-lg font-semibold">Chatbox</h2>
+            <h2 className="text-lg font-semibold">AI FrontDesk</h2>
           </div>
           <div className="flex-1 p-4 overflow-y-auto">
             <div className="space-y-4">
