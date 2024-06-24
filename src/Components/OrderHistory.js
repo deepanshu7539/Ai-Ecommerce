@@ -33,7 +33,7 @@ const orders = [
       {
         id: 3,
         name: "Nomad Tumbler",
-        to: "#",
+        to: "/detail",
         price: "$35.00",
         color: "White",
         status: "To be Delivered June 28, 2024",
