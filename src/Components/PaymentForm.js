@@ -1,27 +1,46 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const PaymentForm = () => {
   const [paymentInfo, setPaymentInfo] = useState({
-    cardName: '',
-    cardNumber: '',
-    expirationDate: '',
-    cvc: '',
+    cardName: "",
+    cardNumber: "",
+    expirationDate: "",
+    cvc: "",
   });
 
   const total = "$282.00";
 
-  const [expiryMonth, setExpiryMonth] = useState('');
-  const [expiryYear, setExpiryYear] = useState('');
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPaymentInfo({
+      ...paymentInfo,
+      [name]: value,
+    });
+  };
+
+  const handleCardChange=(e)=> {
+    console.log("clicked");
+    const { name, value } = e.target;
+    setPaymentInfo({
+      ...paymentInfo,
+      [name]: value,
+    });
+
+    setTimeout(()=> {
+      setPaymentInfo({
+        ...paymentInfo,
+        [name]: "x".repeat(value.length),
+      });
+    },100);
+
+     
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPaymentInfo({
-      ...paymentInfo,
-      expirationDate: `${expiryMonth}/${expiryYear}`,
-    });
-    console.log(Date.now);
-    // onNext(); // Example function to proceed to the next step
+    console.log(paymentInfo); // Log the paymentInfo upon form submission
+    // Add logic here to proceed with payment or navigate to next step
   };
 
   return (
@@ -34,21 +53,23 @@ const PaymentForm = () => {
 
           <div className="mt-6 sm:mt-8">
             <form
-              action="#"
               className="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6 lg:max-w-xl lg:p-8 mx-auto"
               onSubmit={handleSubmit}
             >
               <div className="mb-6 grid grid-cols-2 gap-4">
                 <div className="col-span-2 sm:col-span-1">
                   <label
-                    htmlFor="full_name"
+                    htmlFor="cardName"
                     className="mb-2 block text-sm font-medium text-gray-900"
                   >
                     Name on Card*
                   </label>
                   <input
                     type="text"
-                    id="full_name"
+                    id="cardName"
+                    name="cardName"
+                    value={paymentInfo.cardName}
+                    onChange={handleChange}
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
                     placeholder="Enter here.."
                   />
@@ -56,23 +77,26 @@ const PaymentForm = () => {
 
                 <div className="col-span-2 sm:col-span-1">
                   <label
-                    htmlFor="card-number-input"
+                    htmlFor="cardNumber"
                     className="mb-2 block text-sm font-medium text-gray-900"
                   >
                     Card number*
                   </label>
                   <input
                     type="text"
-                    id="card-number-input"
+                    id="cardNumber"
+                    name="cardNumber"
+                    value={paymentInfo.cardNumber}
+                    onChange={handleCardChange}
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
                     placeholder="xxxx-xxxx-xxxx-xxxx"
-                    pattern="^4[0-9]{12}(?:[0-9]{3})?$"
+                    // pattern="^4[0-9]{12}(?:[0-9]{3})?$"
                   />
                 </div>
 
                 <div>
                   <label
-                    htmlFor="card-expiration-input"
+                    htmlFor="expirationDate"
                     className="mb-2 block text-sm font-medium text-gray-900"
                   >
                     Card expiration*
@@ -83,21 +107,22 @@ const PaymentForm = () => {
                         className="h-4 w-4 text-gray-500"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
                         <path
                           fillRule="evenodd"
-                          d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm-10 4a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01Zm6 0a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2h-1Zm6 0a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01Z"
+                          d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm9.408-5.5a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2Z"
                           clipRule="evenodd"
                         />
                       </svg>
                     </div>
                     <input
-                      id="card-expiration-input"
                       type="text"
+                      id="expirationDate"
+                      name="expirationDate"
+                      value={paymentInfo.expirationDate}
+                      onChange={handleChange}
                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-9 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                       placeholder="12/23"
                     />
@@ -106,7 +131,7 @@ const PaymentForm = () => {
 
                 <div>
                   <label
-                    htmlFor="cvv-input"
+                    htmlFor="cvc"
                     className="mb-2 flex items-center gap-1 text-sm font-medium text-gray-900"
                   >
                     CVV*
@@ -140,7 +165,10 @@ const PaymentForm = () => {
                   </label>
                   <input
                     type="number"
-                    id="cvv-input"
+                    id="cvc"
+                    name="cvc"
+                    value={paymentInfo.cvc}
+                    onChange={handleChange}
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
                     placeholder="•••"
                   />
@@ -151,7 +179,9 @@ const PaymentForm = () => {
                 type="submit"
                 className="flex w-full items-center justify-center rounded-lg bg-indigo-500 px-5 py-2.5 text-sm font-medium hover:bg-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-300 text-white"
               >
-                <Link to="/history"> Pay now {total} </Link>
+                <Link to="/history" className="text-white">
+                  Pay now {total}
+                </Link>
               </button>
             </form>
 
@@ -159,17 +189,17 @@ const PaymentForm = () => {
               <img
                 className="h-8 w-auto"
                 src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/paypal.svg"
-                alt=""
+                alt="PayPal"
               />
               <img
                 className="h-8 w-auto"
                 src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/visa.svg"
-                alt=""
+                alt="Visa"
               />
               <img
                 className="h-8 w-auto"
                 src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/mastercard.svg"
-                alt=""
+                alt="Mastercard"
               />
             </div>
           </div>
