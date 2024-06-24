@@ -33,8 +33,8 @@ const timeline = [
     content: "Order Placed",
     target: "Check here",
     to: "#",
-    date: "Sep 20",
-    datetime: "2020-09-20",
+    date: "June 24",
+    datetime: "2024-09-20",
     status: "started",
   },
   {
@@ -43,8 +43,8 @@ const timeline = [
     target: "Check here",
 
     to: "#",
-    date: "Sep 20",
-    datetime: "2020-09-20",
+    date: "June 24",
+    datetime: "2024-09-20",
     status: "started",
   },
   {
@@ -53,20 +53,20 @@ const timeline = [
     target: "Check here",
 
     to: "#",
-    date: "Sep 22",
+    date: "June 24",
     datetime: "2020-09-22",
     status: "in",
   },
-  {
-    id: 3,
-    content: "Out for delivery",
-    target: "Check here",
+  // {
+  //   id: 3,
+  //   content: "Out for delivery",
+  //   target: "Check here",
 
-    to: "#",
-    date: "Sep 28",
-    datetime: "2020-09-28",
-    status: "completed",
-  },
+  //   to: "#",
+  //   date: "Sep 28",
+  //   datetime: "2020-09-28",
+  //   status: "completed",
+  // },
   // {
   //   id: 4,
   //   content: "Delivered",
@@ -76,15 +76,15 @@ const timeline = [
   //   datetime: "2020-09-30",
   //   status: "in",
   // },
-  {
-    id: 5,
-    content: "Delivered by",
-    target: "Tom Cook",
-    to: "#",
-    date: "Oct 4",
-    datetime: "2020-10-04",
-    status: "completed",
-  },
+  // {
+  //   id: 5,
+  //   content: "Delivered by",
+  //   target: "Tom Cook",
+  //   to: "#",
+  //   date: "Oct 4",
+  //   datetime: "2020-10-04",
+  //   status: "completed",
+  // },
 ];
 
 function classNames(...classes) {

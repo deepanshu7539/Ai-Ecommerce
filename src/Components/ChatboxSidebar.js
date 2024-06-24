@@ -30,7 +30,8 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
     history: "Here's your order history!",
     status: "Check the status here!",
     payment: "Almost there! Make your payment here to complete the purchase.",
-    red: "Here's your stunning Red T-shirt",
+    red: "Here's your stunning Red T-shirt!",
+    gray: "Here's your Gray T-shirt",
     default: "How can I assist you further?",
   };
 
@@ -44,6 +45,7 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
     { command: "status", action: "status" },
     { command: "payment", action: "payment" },
     { command: "red", action: "red" },
+    { command: "gray", action: "gray" },
   ];
 
   const parseUserInput = (input) => {

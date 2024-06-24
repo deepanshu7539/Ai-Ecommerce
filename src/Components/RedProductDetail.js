@@ -1,4 +1,6 @@
+
 import { useState } from "react";
+import {Link} from 'react-router-dom'
 import {
   Disclosure,
   DisclosureButton,
@@ -13,15 +15,43 @@ import {
 } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import Review from './Review'
+
 
 const product = {
-  name: "Zip Tote Basket",
-  price: "$140",
+  name: "Round Neck T-Shirt",
+  price: "$100",
   rating: 4,
   colors: [
     {
+      name: "White",
+      bgColor: "bg-black",
+      to:"/detail",
+      selectedColor: "ring-gray-400",
+      images: [
+        {
+          src: "https://www.westside.com/cdn/shop/products/100001_300847997_002_1.jpg?v=1715198984&width=493",
+
+          alt: "Two each of gray, white, and black shirts laying flat.",
+        },
+        {
+          src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
+          alt: "Model wearing plain black Black T-shirt.",
+        },
+        {
+          src: "https://nikfashions.in/wp-content/uploads/2019/03/Black-Plain-T-Shirt-Folded.jpg",
+          alt: "Model wearing plain gray Black T-shirt.",
+        },
+        {
+          src: "https://www.westside.com/cdn/shop/products/100001_300847997_002_3.jpg?v=1715198984&width=493",
+          alt: "Model wearing plain white Black T-shirt.",
+        },
+      ],
+    },
+    {
       name: "Washed Black",
       bgColor: "bg-red-700",
+      to:"/red",
       selectedColor: "ring-gray-700",
       images: [
         {
@@ -52,33 +82,11 @@ const product = {
         // More images for Washed Black...
       ],
     },
-    {
-      name: "White",
-      bgColor: "bg-black",
-      selectedColor: "ring-gray-400",
-      images: [
-        {
-          src: "https://www.westside.com/cdn/shop/products/100001_300847997_002_1.jpg?v=1715198984&width=493",
 
-          alt: "Two each of gray, white, and black shirts laying flat.",
-        },
-        {
-          src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
-          alt: "Model wearing plain black Black T-shirt.",
-        },
-        {
-          src: "https://nikfashions.in/wp-content/uploads/2019/03/Black-Plain-T-Shirt-Folded.jpg",
-          alt: "Model wearing plain gray Black T-shirt.",
-        },
-        {
-          src: "https://www.westside.com/cdn/shop/products/100001_300847997_002_3.jpg?v=1715198984&width=493",
-          alt: "Model wearing plain white Black T-shirt.",
-        },
-      ],
-    },
     {
       name: "Washed Gray",
       bgColor: "bg-gray-500",
+      to:"/gray",
       selectedColor: "ring-gray-500",
       images: [
         {
@@ -110,7 +118,7 @@ const product = {
     },
   ],
   description: `
-    <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
+    <p>The Round Neck T-Shirt is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
   `,
   details: [
     {
@@ -165,12 +173,13 @@ const product = {
   ],
 };
 
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [selectedColor, setSelectedColor] = useState(product.colors[1]);
 
   return (
     <div className="bg-white">
@@ -278,7 +287,9 @@ export default function Example() {
                     onChange={setSelectedColor}
                     className="flex items-center space-x-3"
                   >
+
                     {product.colors.map((color) => (
+                      <Link to={color.to}>
                       <Radio
                         key={color.name}
                         value={color}
@@ -300,18 +311,21 @@ export default function Example() {
                           )}
                         />
                       </Radio>
+                      </Link>
                     ))}
                   </RadioGroup>
                 </fieldset>
               </div>
 
               <div className="mt-10 flex">
+                <Link to="/cart">
                 <button
                   type="submit"
-                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
                 >
-                  Add to bag
+                   Add to bag
                 </button>
+                </Link>
 
                 <button
                   type="button"
@@ -379,6 +393,7 @@ export default function Example() {
             </section>
           </div>
         </div>
+        <Review />
       </div>
     </div>
   );

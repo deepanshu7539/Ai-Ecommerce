@@ -13,6 +13,7 @@ import ProgressBar from "./Components/ProgressBar";
 import PaymentForm from "./Components/PaymentForm";
 import Products from "./Components/Products";
 import RedProductDetail from './Components/RedProductDetail';
+import GrayProductDetail from './Components/GrayProductDetail';
 
 function RouterPage() {
    const [isChatboxOpen, setIsChatboxOpen] = useState(false);
@@ -48,6 +49,7 @@ function RouterPage() {
             <Route path="/register" element={<Register />} />
             <Route path="/detail" element={<ProductDetail />} />
             <Route path="/red" element={<RedProductDetail/>}/>
+            <Route path="/gray" element={<GrayProductDetail/>}/>
             <Route path="/history" element={<OrderHistory />} />
             <Route path="/status" element={<ProgressBar />} />
             <Route path="/products" element={<Products />} />
