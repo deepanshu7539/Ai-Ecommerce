@@ -32,6 +32,11 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
     payment: "Almost there! Make your payment here to complete the purchase.",
     red: "Here's your stunning Red T-shirt!",
     gray: "Here's your Gray T-shirt",
+    jeans:"Here's your jeans",
+    shoes:"Checkout these amazing shoes!",
+    basket:"A multipurpose basket is a good choice to have",
+    watch:"Check this amazing watch!",
+    bag:"Here's your versatile bag – perfect for any occasion!",
     default: "How can I assist you further?",
   };
 
@@ -46,6 +51,10 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
     { command: "payment", action: "payment" },
     { command: "red", action: "red" },
     { command: "gray", action: "grayb" },
+    { command: "blue", action: "item/jeans" },
+    { command: "watch", action: "item/watch" },
+    { command: "shoes", action: "item/shoes" },
+    { command: "bag", action: "item/bag" },
   ];
 
   const parseUserInput = (input) => {
@@ -104,8 +113,11 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
 
   useEffect(() => {
     if(shouldPathCalled) {
-    const text=location.pathname.substring(1);
-    console.log(text);
+      let text=location.pathname.substring(1);
+      if (location.pathname.startsWith('/item/')) {
+        text = location.pathname.split('/').pop();
+      }
+    // console.log(text);
     const responseText =
         systemResponses[text] || systemResponses["default"];
         const systemResponse = { text: responseText, sender: "system" };
@@ -115,6 +127,10 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
       setShouldPathCalled(true);
     }
   }, [location.pathname]);
+
+  useEffect(()=> {
+    toggleSidebar();
+  },[]);
 
   return (
     <>

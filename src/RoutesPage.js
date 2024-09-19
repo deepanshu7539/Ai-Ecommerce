@@ -8,12 +8,15 @@ import Cart from "./Components/Cart";
 import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
 import ProductDetail from "./Components/ProductDetail";
+import EachProductDetail from "./Components/EachProductDetail";
 import OrderHistory from "./Components/OrderHistory";
 import ProgressBar from "./Components/ProgressBar";
 import PaymentForm from "./Components/PaymentForm";
 import Products from "./Components/Products";
 import RedProductDetail from './Components/RedProductDetail';
 import GrayProductDetail from './Components/GrayProductDetail';
+import Crouser from './Components/Crouser';
+import Home from './Home';
 
 function RouterPage() {
    const [isChatboxOpen, setIsChatboxOpen] = useState(false);
@@ -24,12 +27,12 @@ function RouterPage() {
 
   return (
     <Router>
-      <div className="App flex">
+      <div className="" >
         <div className="z-50">
           <ChatboxSidebar toggleProductsWidth={toggleProductsWidth} />
         </div>
         <div
-          className={` container p-4 transition-all duration-300  ${
+          className={` p-4 transition-all duration-300  ${
             isChatboxOpen ? "sm:mr-40 md:mr-80" : "mr-0"
           }`}
         >
@@ -37,7 +40,7 @@ function RouterPage() {
           <Routes>
             <Route
               path="/"
-              element={<ProductList isChatboxOpen={isChatboxOpen} />}
+              element={<Home isChatboxOpen={isChatboxOpen} />}
             />
             {/* Add more routes here if needed */}
             {/* <Route
@@ -54,6 +57,7 @@ function RouterPage() {
             <Route path="/status" element={<ProgressBar />} />
             <Route path="/products" element={<Products />} />
             <Route path="/payment" element={<PaymentForm />} />
+            <Route path="/item/:itemName" element={<EachProductDetail />} />
           </Routes>
         </div>
       </div>

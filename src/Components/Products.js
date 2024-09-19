@@ -32,6 +32,7 @@ const products = [
     imageAlt:
       "Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls.",
     price: "$140",
+    detail:'/item/basket',
   },
   {
     id: 1,
@@ -44,6 +45,7 @@ const products = [
     imageAlt:
       "Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls.",
     price: "$100",
+    detail:'/detail',
   },
   {
     id: 1,
@@ -56,6 +58,7 @@ const products = [
     imageAlt:
       "Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls.",
     price: "$120",
+    detail:'/item/jeans',
   },
   {
     id: 1,
@@ -68,6 +71,7 @@ const products = [
     imageAlt:
       "Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls.",
     price: "$120",
+    detail:'/item/shoes',
   },
   {
     id: 1,
@@ -80,6 +84,7 @@ const products = [
     imageAlt:
       "Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls.",
     price: "$120",
+    detail:'/item/watch',
   },
   {
     id: 1,
@@ -92,6 +97,7 @@ const products = [
     imageAlt:
       "Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls.",
     price: "$120",
+    detail:'/item/bag',
   },
   // More products...
 ];
@@ -430,7 +436,7 @@ export default function Products() {
             {products.map((product) => (
               <div key={product.id} className="">
                 <div className="relative">
-                  <Link to="/detail">
+                  <Link to={product.detail}>
                     <div className="relative h-72 w-full overflow-hidden rounded-lg">
                       <img
                         src={product.imageSrc}
@@ -454,7 +460,7 @@ export default function Products() {
                       </p>
                     </div>
                   </div>
-                  <Link to='/detail'>
+                  <Link to={product.detail}>
                     <div className="absolute inset-x-0 top-0 flex h-72 items-end justify-end overflow-hidden rounded-lg p-4">
                       <div
                         aria-hidden="true"
@@ -469,7 +475,7 @@ export default function Products() {
                 <div className="mt-6 flex justify-between">
                   <div>
                     <Link
-                      to="/detail"
+                      to={product.detail}
                       className="relative flex items-center justify-center rounded-md border border-transparent bg-gray-200 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200"
                     >
                       More Details

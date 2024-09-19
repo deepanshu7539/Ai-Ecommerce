@@ -84,7 +84,7 @@ export default function Cart() {
   }, [products, shipping, tax]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white w-full">
       <header className="relative bg-white">
         <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
           Get free delivery on orders over $100
@@ -233,7 +233,7 @@ export default function Cart() {
                     />
                   </Link>
                 </dt>
-                <dd className="text-sm font-medium text-gray-900">${shipping}.00</dd>
+                <dd className="text-sm font-medium text-gray-900">${total>100?0:shipping}.00</dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex text-sm text-gray-600">
