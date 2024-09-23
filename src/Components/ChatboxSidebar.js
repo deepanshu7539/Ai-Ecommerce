@@ -32,6 +32,11 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
     payment: "Almost there! Make your payment here to complete the purchase.",
     red: "Here's your stunning Red T-shirt!",
     gray: "Here's your Gray T-shirt",
+    jeans: "Here's your jeans",
+    shoes:"Checkout these amazing shoes!",
+    basket:"A multipurpose basket is a good choice to have",
+    watch:"Check this amazing watch!",
+    bag:"Here's your versatile bag – perfect for any occasion!",
     default: "How can I assist you further?",
   };
 
@@ -45,7 +50,11 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
     { command: "status", action: "status" },
     { command: "payment", action: "payment" },
     { command: "red", action: "red" },
-    { command: "gray", action: "grayb" },
+    { command: "gray", action: "gray" },
+    { command: "jeans", action: "item/jeans" },
+    { command: "watch", action: "item/watch" },
+    { command: "shoes", action: "item/shoes" },
+    { command: "bag", action: "item/bag" },
   ];
 
   const parseUserInput = (input) => {
@@ -55,6 +64,23 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
     );
     return command ? command.action : null;
   };
+
+  // Map command action to response key for systemResponses
+const getResponseKey = (command) => {
+  switch (command) {
+    case "item/jeans":
+      return "jeans";
+    case "item/watch":
+      return "watch";
+    case "item/shoes":
+      return "shoes";
+    case "item/bag":
+      return "bag";
+    // Add other specific mappings here if needed
+    default:
+      return command;
+  }
+};
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -68,8 +94,10 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
         navigate(`/${command}`);
       }
 
+      const responseKey = getResponseKey(command);
+
       const responseText =
-        systemResponses[command] || systemResponses["default"];
+        systemResponses[responseKey] || systemResponses["default"];
       const systemResponse = { text: responseText, sender: "system" };
 
       setMessages((prevMessages) => [...prevMessages, systemResponse]);
@@ -104,8 +132,11 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
 
   useEffect(() => {
     if(shouldPathCalled) {
-    const text=location.pathname.substring(1);
-    console.log(text);
+      let text=location.pathname.substring(1);
+      if (location.pathname.startsWith('/item/')) {
+        text = location.pathname.split('/').pop();
+      }
+    // console.log(text);
     const responseText =
         systemResponses[text] || systemResponses["default"];
         const systemResponse = { text: responseText, sender: "system" };
@@ -115,6 +146,10 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
       setShouldPathCalled(true);
     }
   }, [location.pathname]);
+
+  useEffect(()=> {
+    toggleSidebar();
+  },[]);
 
   return (
     <>
@@ -127,7 +162,7 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
         {isOpen ? (
           <XCircleIcon className="h-6 w-6 text-white text-bold" aria-hidden="true" />
         ) : (
-          "Open Chat"
+          "Open Assistant"
         )}
       </button>
       <div
@@ -137,7 +172,7 @@ const ChatboxSidebar = ({ toggleProductsWidth }) => {
       >
         <div className="flex flex-col h-full">
           <div className="p-4 border-b">
-            <h2 className="text-lg font-semibold">AI FrontDesk</h2>
+            <h2 className="text-lg font-semibold">AI Ecommerce</h2>
           </div>
           <div className="flex-1 p-4 overflow-y-auto">
             <div className="space-y-4">

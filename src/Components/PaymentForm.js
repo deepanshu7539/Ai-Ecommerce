@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import {Navigate, useNavigate} from 'react-router-dom';
 
 const PaymentForm = () => {
   const [paymentInfo, setPaymentInfo] = useState({
@@ -8,6 +9,8 @@ const PaymentForm = () => {
     expirationDate: "",
     cvc: "",
   });
+  
+  const navigate=useNavigate();
 
   const total = "$282.00";
 
@@ -20,7 +23,6 @@ const PaymentForm = () => {
   };
 
   const handleCardChange=(e)=> {
-    console.log("clicked");
     const { name, value } = e.target;
     setPaymentInfo({
       ...paymentInfo,
@@ -39,7 +41,7 @@ const PaymentForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(paymentInfo); // Log the paymentInfo upon form submission
+    // navigate('/history');
     // Add logic here to proceed with payment or navigate to next step
   };
 
@@ -62,7 +64,7 @@ const PaymentForm = () => {
                     htmlFor="cardName"
                     className="mb-2 block text-sm font-medium text-gray-900"
                   >
-                    Name on Card*
+                    Name on Card <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -72,6 +74,8 @@ const PaymentForm = () => {
                     onChange={handleChange}
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
                     placeholder="Enter here.."
+                    required
+                    disabled
                   />
                 </div>
 
@@ -80,7 +84,7 @@ const PaymentForm = () => {
                     htmlFor="cardNumber"
                     className="mb-2 block text-sm font-medium text-gray-900"
                   >
-                    Card number*
+                    Card number <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -90,6 +94,8 @@ const PaymentForm = () => {
                     onChange={handleCardChange}
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
                     placeholder="xxxx-xxxx-xxxx-xxxx"
+                    required
+                    disabled
                     // pattern="^4[0-9]{12}(?:[0-9]{3})?$"
                   />
                 </div>
@@ -99,7 +105,7 @@ const PaymentForm = () => {
                     htmlFor="expirationDate"
                     className="mb-2 block text-sm font-medium text-gray-900"
                   >
-                    Card expiration*
+                    Card expiration <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5">
@@ -125,6 +131,8 @@ const PaymentForm = () => {
                       onChange={handleChange}
                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-9 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                       placeholder="12/23"
+                      required
+                      disabled
                     />
                   </div>
                 </div>
@@ -134,8 +142,8 @@ const PaymentForm = () => {
                     htmlFor="cvc"
                     className="mb-2 flex items-center gap-1 text-sm font-medium text-gray-900"
                   >
-                    CVV*
-                    <button
+                    CVV <span className="text-red-500">*</span>
+                    {/* <button
                       data-tooltip-target="cvv-desc"
                       data-tooltip-trigger="hover"
                       className="text-gray-400 hover:text-gray-900"
@@ -153,7 +161,7 @@ const PaymentForm = () => {
                           clipRule="evenodd"
                         />
                       </svg>
-                    </button>
+                    </button> */}
                     <div
                       id="cvv-desc"
                       role="tooltip"
@@ -171,6 +179,8 @@ const PaymentForm = () => {
                     onChange={handleChange}
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
                     placeholder="•••"
+                    required
+                    disabled
                   />
                 </div>
               </div>
@@ -179,9 +189,9 @@ const PaymentForm = () => {
                 type="submit"
                 className="flex w-full items-center justify-center rounded-lg bg-indigo-500 px-5 py-2.5 text-sm font-medium hover:bg-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-300 text-white"
               >
-                <Link to="/history" className="text-white">
+                {/* <Link to="/history" className="text-white"> */}
                   Pay now {total}
-                </Link>
+                {/* </Link> */}
               </button>
             </form>
 

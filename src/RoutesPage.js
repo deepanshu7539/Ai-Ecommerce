@@ -8,15 +8,27 @@ import Cart from "./Components/Cart";
 import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
 import ProductDetail from "./Components/ProductDetail";
+import EachProductDetail from "./Components/EachProductDetail";
 import OrderHistory from "./Components/OrderHistory";
 import ProgressBar from "./Components/ProgressBar";
 import PaymentForm from "./Components/PaymentForm";
 import Products from "./Components/Products";
 import RedProductDetail from './Components/RedProductDetail';
 import GrayProductDetail from './Components/GrayProductDetail';
+import Crouser from './Components/Crouser';
+import Home from './Home';
 
 function RouterPage() {
    const [isChatboxOpen, setIsChatboxOpen] = useState(false);
+
+   const [cartItems, setCartItems] = useState([
+    
+   ]);
+
+  // Function to add product to cart
+  const addToCart = (product) => {
+    setCartItems((prevItems) => [product,...prevItems]);
+  };
 
    const toggleProductsWidth = (isOpen) => {
      setIsChatboxOpen(isOpen);
@@ -24,12 +36,12 @@ function RouterPage() {
 
   return (
     <Router>
-      <div className="App flex">
+      <div className="" >
         <div className="z-50">
           <ChatboxSidebar toggleProductsWidth={toggleProductsWidth} />
         </div>
         <div
-          className={` container p-4 transition-all duration-300  ${
+          className={` p-4 transition-all duration-300  ${
             isChatboxOpen ? "sm:mr-40 md:mr-80" : "mr-0"
           }`}
         >
@@ -37,23 +49,24 @@ function RouterPage() {
           <Routes>
             <Route
               path="/"
-              element={<ProductList isChatboxOpen={isChatboxOpen} />}
+              element={<Home isChatboxOpen={isChatboxOpen} addToCart={addToCart} />}
             />
             {/* Add more routes here if needed */}
             {/* <Route
               path="/nav"
               element={<Navbar isChatboxOpen={isChatboxOpen} />}
             /> */}
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/cart" element={<Cart cartItems={cartItems} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/detail" element={<ProductDetail />} />
-            <Route path="/red" element={<RedProductDetail/>}/>
-            <Route path="/gray" element={<GrayProductDetail/>}/>
+            <Route path="/detail" element={<ProductDetail addToCart={addToCart} />} />
+            <Route path="/red" element={<RedProductDetail addToCart={addToCart}  />}/>
+            <Route path="/gray" element={<GrayProductDetail addToCart={addToCart} />}/>
             <Route path="/history" element={<OrderHistory />} />
             <Route path="/status" element={<ProgressBar />} />
-            <Route path="/products" element={<Products />} />
+            <Route path="/products" element={<Products addToCart={addToCart} />} />
             <Route path="/payment" element={<PaymentForm />} />
+            <Route path="/item/:itemName" element={<EachProductDetail addToCart={addToCart} />} />
           </Routes>
         </div>
       </div>

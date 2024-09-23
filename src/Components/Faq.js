@@ -8,21 +8,21 @@ import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 const faqs = [
   {
     id: 1,
-    question: "What's the best thing about Switzerland?",
+    question: "How does the AI assistant help me browse products?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "The AI assistant allows you to easily navigate the site by responding to commands like 'Show me all products.' When you ask this, the front page will update to display all available products, helping you browse effortlessly without needing to click through menus.",
   },
   {
-    id: 1,
-    question: "What's the best thing about Switzerland?",
+    id: 2,
+    question: "How can I explore a single product using the AI assistant?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "You can easily explore any single product by typing its name into the chatbox. Simply write the name of the product you want to see, and the AI assistant will instantly display the details on the front page.",
   },
   {
-    id: 1,
-    question: "What's the best thing about Switzerland?",
+    id: 3,
+    question: "Can I use this website like a normal eCommerce site?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Yes, you absolutely can! While the AI assistant is available to enhance your shopping experience, you can still browse, search, and purchase products just like on any other eCommerce website, using the navigation menus and buttons.",
   },
 
   // More questions...
@@ -30,7 +30,7 @@ const faqs = [
 
 export default function Faq() {
   return (
-    <div className="p-8">
+    <div className="p-8 mt-8">
       <div className="mx-auto max-w-7xl divide-y divide-gray-900/10">
         <h2 className="text-xl text-[#444444] text-center font-bold mb-4">
           Frequently asked questions

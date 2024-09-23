@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import {
   Disclosure,
   DisclosureButton,
@@ -178,8 +178,26 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Example({ addToCart }) {
   const [selectedColor, setSelectedColor] = useState(product.colors[1]);
+  const navigate=useNavigate();
+
+  const handleAddToCart = (product) => {
+    const convertedProduct = {
+      id: product.id, // Unique ID for this product
+      name: product.name,
+      href: "/red",
+      price: parseFloat(product.price.replace("$", "")), // Convert string price to a number
+      color: "red", // "Blue"
+      inStock: true, // You can dynamically set this if you have stock info
+      size: "Large", // Set this as needed
+      imageSrc: "https://img.freepik.com/premium-photo/t-shirt-mockup_917213-68288.jpg?size=626&ext=jpg", // First image
+      imageAlt:"red t-shirt", // First image alt text
+      quantity: 1, // Default quantity
+    };
+    addToCart(convertedProduct);
+    navigate("/cart"); // Redirect to the cart page
+  };
 
   return (
     <div className="bg-white">
@@ -318,14 +336,13 @@ export default function Example() {
               </div>
 
               <div className="mt-10 flex">
-                <Link to="/cart">
                 <button
                   type="submit"
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                  onClick={() => handleAddToCart(product)}
                 >
                    Add to bag
                 </button>
-                </Link>
 
                 <button
                   type="button"
