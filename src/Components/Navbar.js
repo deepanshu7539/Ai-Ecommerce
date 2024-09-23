@@ -43,11 +43,13 @@ export default function Example({ isChatboxOpen }) {
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
+                    <Link to='/'>
                     <img
                       className="h-16 w-auto"
                       src="https://r2.erweima.ai/imgcompressed/compressed_9bdc427d52f7344122f8c0955c780abc.webp"
                       alt="Your Company"
                     />
+                    </Link>
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                     <Link
@@ -88,7 +90,7 @@ export default function Example({ isChatboxOpen }) {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png"
                           alt=""
                         />
                       </MenuButton>

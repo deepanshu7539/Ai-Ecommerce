@@ -1,6 +1,6 @@
 
 import { useState,useEffect } from "react";
-import {Link,useParams} from 'react-router-dom'
+import {Link,useParams, useNavigate} from 'react-router-dom'
 import {
   Disclosure,
   DisclosureButton,
@@ -29,6 +29,7 @@ const productMapping = {
 
 const products=[
     {
+    id:1,
     name: "Round Neck T-Shirt",
     price: "$100",
     rating: 4,
@@ -184,6 +185,7 @@ const products=[
   },
 
   {
+    id:2,
     name: "Jeans",
     price: "$120",
     rating: 4,
@@ -258,6 +260,7 @@ const products=[
   },
 
   {
+    id:3,
     name: "Men Shoes",
     price: "$120",
     rating: 4,
@@ -328,6 +331,7 @@ const products=[
   },
 
   {
+    id:4,
     name: "Watch",
     price: "$120",
     rating: 4,
@@ -468,6 +472,7 @@ const products=[
   },
 
   {
+    id:5,
     name: "Zip Tote Basket",
     price: "$120",
     rating: 4,
@@ -543,10 +548,29 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Example({ addToCart }) {
     const { itemName } = useParams();
   const [selectedColor, setSelectedColor] = useState(null);
   const [product, setProduct] = useState(null);
+
+  const navigate=useNavigate();
+
+  const handleAddToCart = (product) => {
+    const convertedProduct = {
+      id: product.id, // Unique ID for this product
+      name: product.name,
+      href: product.colors[0].to,
+      price: parseFloat(product.price.replace("$", "")), // Convert string price to a number
+      color: product.colors[0].name, // "Blue"
+      inStock: true, // You can dynamically set this if you have stock info
+      size: "Large", // Set this as needed
+      imageSrc: product.colors[0].images[0].src, // First image
+      imageAlt: product.colors[0].images[0].alt, // First image alt text
+      quantity: 1, // Default quantity
+    };
+    addToCart(convertedProduct);
+    navigate("/cart"); // Redirect to the cart page
+  };
 
   useEffect(() => {
     const productIndex = productMapping[itemName];
@@ -698,14 +722,15 @@ export default function Example() {
               </div>
 
               <div className="mt-10 flex">
-                <Link to="/cart">
+                {/* <Link to="/cart"> */}
                 <button
                   type="submit"
                   className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-500 px-8 py-3 text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                  onClick={() => handleAddToCart(product)}
                 >
                    Add to bag
                 </button>
-                </Link>
+                {/* </Link> */}
 
                 <button
                   type="button"

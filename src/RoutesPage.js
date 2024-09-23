@@ -21,6 +21,15 @@ import Home from './Home';
 function RouterPage() {
    const [isChatboxOpen, setIsChatboxOpen] = useState(false);
 
+   const [cartItems, setCartItems] = useState([
+    
+   ]);
+
+  // Function to add product to cart
+  const addToCart = (product) => {
+    setCartItems((prevItems) => [product,...prevItems]);
+  };
+
    const toggleProductsWidth = (isOpen) => {
      setIsChatboxOpen(isOpen);
    };
@@ -40,24 +49,24 @@ function RouterPage() {
           <Routes>
             <Route
               path="/"
-              element={<Home isChatboxOpen={isChatboxOpen} />}
+              element={<Home isChatboxOpen={isChatboxOpen} addToCart={addToCart} />}
             />
             {/* Add more routes here if needed */}
             {/* <Route
               path="/nav"
               element={<Navbar isChatboxOpen={isChatboxOpen} />}
             /> */}
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/cart" element={<Cart cartItems={cartItems} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/detail" element={<ProductDetail />} />
-            <Route path="/red" element={<RedProductDetail/>}/>
-            <Route path="/gray" element={<GrayProductDetail/>}/>
+            <Route path="/detail" element={<ProductDetail addToCart={addToCart} />} />
+            <Route path="/red" element={<RedProductDetail addToCart={addToCart}  />}/>
+            <Route path="/gray" element={<GrayProductDetail addToCart={addToCart} />}/>
             <Route path="/history" element={<OrderHistory />} />
             <Route path="/status" element={<ProgressBar />} />
-            <Route path="/products" element={<Products />} />
+            <Route path="/products" element={<Products addToCart={addToCart} />} />
             <Route path="/payment" element={<PaymentForm />} />
-            <Route path="/item/:itemName" element={<EachProductDetail />} />
+            <Route path="/item/:itemName" element={<EachProductDetail addToCart={addToCart} />} />
           </Routes>
         </div>
       </div>

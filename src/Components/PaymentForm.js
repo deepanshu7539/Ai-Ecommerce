@@ -41,7 +41,7 @@ const PaymentForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/history');
+    // navigate('/history');
     // Add logic here to proceed with payment or navigate to next step
   };
 
@@ -75,6 +75,7 @@ const PaymentForm = () => {
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
                     placeholder="Enter here.."
                     required
+                    disabled
                   />
                 </div>
 
@@ -94,6 +95,7 @@ const PaymentForm = () => {
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
                     placeholder="xxxx-xxxx-xxxx-xxxx"
                     required
+                    disabled
                     // pattern="^4[0-9]{12}(?:[0-9]{3})?$"
                   />
                 </div>
@@ -130,6 +132,7 @@ const PaymentForm = () => {
                       className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-9 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                       placeholder="12/23"
                       required
+                      disabled
                     />
                   </div>
                 </div>
@@ -177,6 +180,7 @@ const PaymentForm = () => {
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500"
                     placeholder="•••"
                     required
+                    disabled
                   />
                 </div>
               </div>

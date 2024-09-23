@@ -9,50 +9,11 @@ import Faq from "./Faq";
 import { useEffect, useState } from "react";
 
 const initialProducts = [
-  {
-    id: 1,
-    name: "T-Shirt",
-    href: "#",
-    price: 100,
-    color: "Black",
-    inStock: false,
-    leadTime: "3–4 weeks",
-    size: "Large",
-    imageSrc:
-      "https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=600",
-    imageAlt: "Front of men's Basic Tee in black.",
-    quantity: 1,
-  },
-  {
-    id: 2,
-    name: "Zip Tote Basket",
-    href: "#",
-    price: 140,
-    color: "White and Black",
-    inStock: true,
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in sienna.",
-    quantity: 1,
-  },
-  {
-    id: 3,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: 35,
-    color: "White",
-    inStock: true,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg",
-    imageAlt: "Insulated bottle with white base and black snap lid.",
-    quantity: 1,
-  },
 ];
 
-export default function Cart() {
+export default function Cart({ cartItems }) {
 
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState(cartItems);
   const [subtotal, setSubtotal] = useState(0);
   const [shipping, setShipping] = useState(5.00);
   const [tax, setTax] = useState(2.00);
@@ -80,7 +41,7 @@ export default function Cart() {
       setShipping(0);
       setTax(0);
     }
-    setTotal(newSubtotal + shipping + tax);
+    setTotal(newSubtotal + (newSubtotal>100?0:shipping) + tax);
   }, [products, shipping, tax]);
 
   return (
@@ -104,7 +65,7 @@ export default function Cart() {
             >
               {products.map((product, productIdx) => (
                 <li key={product.id} className="flex py-2 sm:py-4">
-                  <Link to="/detail">
+                  <Link to={product.href}>
                   <div className="flex-shrink-0">
                     <img
                       src={product.imageSrc}
@@ -120,7 +81,7 @@ export default function Cart() {
                         <div className="flex justify-between">
                           <h3 className="text-sm">
                             <Link
-                              href={product.href}
+                              to={product.href}
                               className="font-medium text-gray-700 hover:text-gray-800"
                             >
                               {product.name}
@@ -273,7 +234,7 @@ export default function Cart() {
         </form>
       </main>
 
-      <Faq />
+      {/* <Faq /> */}
     </div>
   );
 }
